@@ -28,3 +28,14 @@ POLITEKNIK ELEKTRONIKA NEGERI SURABAYA
 
 </div>
 
+# UDP & TCP Client Server
+
+Pada penugasan kali ini, diberi perintah untuk mengerjakan praktikum konfigurasi _UDP & TCP client server_ menggunakan `python`. Berdasarkan refrensi dari link video dibawah ini:
+
+<div align="center"> 
+
+https://www.youtube.com/watch?v=bKfDS1lOSho
+https://www.youtube.com/watch?v=i1AOd7AQcok
+https://www.youtube.com/watch?v=GlVfVn17_ug
+
+</div>
