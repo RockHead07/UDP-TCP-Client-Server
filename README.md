@@ -31,7 +31,11 @@ POLITEKNIK ELEKTRONIKA NEGERI SURABAYA
 
 <div align="left">
 
+<<<<<<< HEAD
 Pada penugasan kali ini, diberikan perintah untuk mengerjakan praktikum konfigurasi **UDP & TCP Client-Server** menggunakan bahasa pemrograman `Python`.
+=======
+Pada penugasan kali ini, diberikan perintah untuk mengerjakan praktikum konfigurasi **UDP & TCP Client-Server** menggunakan bahasa pemrograman `🐍Python`.
+>>>>>>> f3028a9f8e9b434dfcb71692b5afa301fab21580
 
 Praktikum ini dikerjakan berdasarkan referensi dari beberapa video berikut:
 </div>
@@ -64,7 +68,11 @@ Dan bersifat sebaliknya, **TCP** bersifat *connection-oriented*, yang dimana pro
 
 # 3. Implementasi & Penjelasan Program
 
+<<<<<<< HEAD
 Untuk melakukan konfigurasi **TCP & UDP Client-Server**, digunakan bahasa pemrograman `Python` dengan memanfaatkan modul *socket*.  
+=======
+Untuk melakukan konfigurasi **TCP & UDP Client-Server**, digunakan bahasa pemrograman `🐍Python` dengan memanfaatkan modul *socket*.  
+>>>>>>> f3028a9f8e9b434dfcb71692b5afa301fab21580
 Setiap implementasi dipisahkan ke dalam direktori yang berbeda agar lebih terstruktur dan mudah dipelajari.
 
 Penjelasan langkah demi langkah dapat dilihat pada masing-masing bagian berikut:
