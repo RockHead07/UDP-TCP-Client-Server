@@ -31,11 +31,7 @@ POLITEKNIK ELEKTRONIKA NEGERI SURABAYA
 
 <div align="left">
 
-<<<<<<< HEAD
-Pada penugasan kali ini, diberikan perintah untuk mengerjakan praktikum konfigurasi **UDP & TCP Client-Server** menggunakan bahasa pemrograman `Python`.
-=======
 Pada penugasan kali ini, diberikan perintah untuk mengerjakan praktikum konfigurasi **UDP & TCP Client-Server** menggunakan bahasa pemrograman `🐍Python`.
->>>>>>> f3028a9f8e9b434dfcb71692b5afa301fab21580
 
 Praktikum ini dikerjakan berdasarkan referensi dari beberapa video berikut:
 </div>
