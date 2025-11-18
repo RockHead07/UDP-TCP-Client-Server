@@ -1,5 +1,12 @@
 # 🟩 UDP Client-Server || Konfigurasi Step by Step
 
+> [!NOTE]
+> ## 📌 Disclaimer  
+> Seluruh langkah dan kode pada repository ini disusun berdasarkan materi dan video referensi yang diberikan oleh dosen.  
+> Konten asli pada video tersebut bukan milik saya; seluruh hak cipta tetap pada pemilik resminya.  
+> 🔗 Referensi video: `<LINK_VIDEO>`
+
+
 Apabila anda ingin langsung mencoba *source code* saya, bisa langsung ambil saja dengan menggunakan langkah-langkah berikut:
 
 **📎Clone Repository**
@@ -21,7 +28,7 @@ cd UDP-TCP-Client-Server/UDP\ Client\ Server
 ```arduino
 UDP Client Server/
 ├── udpServer.py
-├── udpSocket.py
+├── udpClient.py
 └── README.md
 ```
 
@@ -43,7 +50,9 @@ Apabila *output* nya menampilkan keluaran dari versi `Python` itu sendiri, maka 
 
 ### UDP Server
 
-Yang pertama kita lakukan, ialah membuat server dari *UDP* nya terlebih dahulu sebelum menjalankan *client*. Server ini nantinya berguna untuk menerima pesan dari *client* dan mengirimkan responnya kembali. Berikut *code program* nya:
+Yang pertama kita lakukan, ialah membuat server dari *UDP* nya terlebih dahulu sebelum menjalankan *client*. Server ini nantinya berguna untuk menerima pesan dari *client* dan mengirimkan responnya kembali. 
+
+Berikut *code program* ***UDP Server*** nya:
 
 ```Python
 import socket  # Mengimpor library socket untuk komunikasi jaringan
@@ -74,7 +83,7 @@ while True:
     serverSocket.sendto(b"Selamat datang di UDP Server", ip_address)
 ```
 
-Karena *code program* ***udpServer.py*** telah dibuat, berikut cara menjalankan *code program* nya. Buka terminal pada direktori projek yang kalian kerjakan, lalu jalankan perintah berikut di terminal:
+Cara menjalankan *code program* diatas, yang pertama buka terminal pada direktori projek yang kalian kerjakan, lalu jalankan perintah berikut di terminal:
 
 ```bash
 python udpServer.py
@@ -102,10 +111,10 @@ print("Respon dari server: \"{}\"".format(data.decode()))
 client.close()
 ```
 
-Setelah *code program* client selesai dibuatm jalankan *client* dengan membuka terminal baru (*biarkan terminal pada bagian server tetap aktif*), lalu jalankan perintah berikut:
+Setelah *code program* client selesai dibuat, jalankan *client* dengan membuka terminal baru (*biarkan terminal pada bagian server tetap aktif*), lalu jalankan perintah berikut:
 
 ```bash
-python udpSocket.py
+python udpClient.py
 ```
 
 Jika berhasil, maka *client* akan mengirimkan pesan ke server, menerima respon, dan menampilkan hasilnya pada terminal.
@@ -131,4 +140,3 @@ Respon dari server: "Selamat datang di UDP Server"
 # ✨ Kesimpulan
 
 Dari konfigurasi *UDP Client-Server* ini, dapat kita simpulkan bahwa komunikasi yang menggunakan protokol *UDP* berjalan dengan konsep *connectionless*, yang dimana *client* dapat langsung mengirimkan data ke server tanpa perlu melakukan proses *handshake* terlebih dahulu. Server hanya perlu mendengarkan pada IP & port tertentu, kemudian menrima pesan dan mengirimkan balasnnya.
-
