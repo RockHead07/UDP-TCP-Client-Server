@@ -8,11 +8,12 @@
 > 🔗 **Referensi Video:**  
 > <div align="center">
 >
-> <a href="[LINK_VIDEO_1](https://www.youtube.com/watch?v=GlVfVn17_ug)">
+> <a href="https://www.youtube.com/watch?v=GlVfVn17_ug">
 >   <img src="https://img.youtube.com/vi/GlVfVn17_ug/0.jpg" width="270">
 > </a>
 >
 > </div>
+
 
 Apabila anda ingin langsung mencoba *source code* saya, bisa langsung ambil saja dengan menggunakan langkah-langkah berikut:
 
@@ -62,7 +63,45 @@ Langkah pertama adalah membuat dan menjalankan *TCP Server*. Berbeda dengan *UDP
 Berikut *code program* ***TCP Server***:
 
 ```Python
+import socket  # Mengimpor library socket untuk komunikasi jaringan
 
+# Mengecek apakah script dijalankan langsung (bukan diimport)
+if __name__ == "__main__":
+    ip = "127.0.0.1"       # IP server (localhost)
+    port = 12345           # Port server untuk mendengarkan koneksi
+
+    # Membuat socket TCP (SOCK_STREAM = TCP)
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Mengikat server pada IP dan port
+    server.bind((ip, port))
+
+    # Memulai server untuk mendengarkan koneksi masuk
+    # Angka 5 berarti maksimal 5 koneksi yang dapat masuk ke "antrian"
+    server.listen(5)
+
+    # Server terus berjalan dan menerima koneksi dari client
+    while True:
+        # Menerima koneksi dari client
+        client, address = server.accept()
+
+        # Menampilkan alamat client yang baru terhubung
+        print(f"Connection from {address[0]}:{address[1]} has been established!")
+
+        # Menerima data dari client (maks 1024 bytes)
+        string = client.recv(1024)
+        
+        # Decode data dari bytes ke string UTF-8
+        string = string.decode("utf-8")
+        
+        # Mengubah pesan menjadi huruf besar
+        string = string.upper()
+
+        # Mengirimkan balik (echo) ke client dalam bentuk bytes
+        client.send(bytes(string, 'utf-8'))
+
+        # Menutup koneksi dengan client
+        client.close()
 ```
 
 Cara menjalankan *code program* diatas, yang pertama buka terminal pada direktori projek yang kalian kerjakan, lalu jalankan perintah berikut di terminal:
@@ -71,6 +110,8 @@ Cara menjalankan *code program* diatas, yang pertama buka terminal pada direktor
 python tcpServer.py
 ```
 
+*Server* akan aktif dan menunggu koneksi dari *Client*.
+
 ### TCP Client
 
 Setelah ***TCP Server*** siap, selanjutnya membuat *client* untuk mengirim pesan dan menerima balasan respon dari *server*.
@@ -78,7 +119,33 @@ Setelah ***TCP Server*** siap, selanjutnya membuat *client* untuk mengirim pesan
 Berikut *code program* ***TCP Client***:
 
 ```python
+import socket  # Mengimpor library socket untuk komunikasi jaringan
 
+# Mengecek apakah script dijalankan langsung
+if __name__ == "__main__":
+    ip = "127.0.0.1"     # IP server tujuan (localhost)
+    port = 12345         # Port server tujuan
+
+    # Membuat socket TCP (SOCK_STREAM berarti protokol TCP)
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Melakukan koneksi ke server dengan IP dan port yang ditentukan
+    server.connect((ip, port))
+    
+    # Meminta input dari user untuk dikirim ke server
+    string = input("Enter a message to send to the server: ")
+
+    # Mengirim pesan ke server dalam bentuk bytes
+    server.send(bytes(string, 'utf-8'))
+
+    # Menerima balasan dari server (maks 1024 bytes)
+    buffer = server.recv(1024)
+
+    # Mengubah data bytes menjadi string UTF-8
+    buffer = buffer.decode("utf-8")
+
+    # Menampilkan respon dari server
+    print(f"Server response: {buffer}")
 ```
 
 Setelah *code program* client selesai dibuat, jalankan *client* dengan membuka terminal baru (*biarkan terminal pada bagian server tetap aktif*), lalu jalankan perintah berikut:
@@ -87,7 +154,7 @@ Setelah *code program* client selesai dibuat, jalankan *client* dengan membuka t
 python tcpClient.py
 ```
 
-Jika berhasil, maka *client* akan mengirimkan pesan ke server, menerima respon, dan menampilkan hasilnya pada terminal. 
+Jika berhasil, maka *client* akan memeberi kita opsi untuk mengirim pesan apapun, yang nantinya server mengembalikan ke versi huruf kapitalnya / **UPPERCASE** dari pesan tersebut.
 
 ### 📤 Output
 
@@ -96,17 +163,20 @@ Berikut, contoh keluaran *output* nya ketika program dijalankan:
 #### Output pada *terminal* Server
 
 ```bash
-UDP server up and listening on
-Pesan dari Client: "b'Hello UDP Server'"
-IP address Client: "('127.0.0.1', 62341)"
+Connection from 127.0.0.1:63789 has been established!
 ```
 
 #### Output pada *terminal* Client
 
+Apabila kita melakukan *input* pesannya seperti dibawah ini, akan dikembalikan menjadi huruf kapital semua.
+
 ```bash
-Respon dari server: "Selamat datang di UDP Server"
+Enter a message to send to the server: Indonesia
+Server response: INDONESIA
 ```
 
 # ✨ Kesimpulan
 
-Dari konfigurasi *UDP Client-Server* ini, dapat kita simpulkan bahwa komunikasi yang menggunakan protokol *UDP* berjalan dengan konsep *connectionless*, yang dimana *client* dapat langsung mengirimkan data ke server tanpa perlu melakukan proses *handshake* terlebih dahulu. Server hanya perlu mendengarkan pada IP & port tertentu, kemudian menrima pesan dan mengirimkan balasnnya.
+Dari konfigurasi *TCP Client-Server* ini, dapat kita simpulkan bahwa komunikasi yang menggunakan protokol *TDP* berjalan dengan konsep *connection-oriented*, yang dimana sebelum proses pengiriman data terjadi, *client* harus terlebih dahulu membuat koneksi (*three-way handshake*) ke server.
+
+Hal ini membuat ***TCP*** lebih dapat diandalkan / *reliable* dibandingkan menggunakan ***UDP***, karena setiap data yang dikirim akan dijamin sampai dengan urutan yang benar. Server menerima pesan dari *client*, memprosesnya (mengubah menjadi huruf kapital), kemudian mengirimkan kembali ke client sebelum menutup koneksi.

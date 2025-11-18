@@ -8,15 +8,16 @@
 > 🔗 **Referensi Video:**  
 > <div align="center">
 >
-> <a href="[LINK_VIDEO_1](https://www.youtube.com/watch?v=bKfDS1lOSho)">
+> <a href="https://www.youtube.com/watch?v=bKfDS1lOSho">
 >   <img src="https://img.youtube.com/vi/bKfDS1lOSho/0.jpg" width="270">
 > </a>
 >
-> <a href="[LINK_VIDEO_2](https://www.youtube.com/watch?v=i1AOd7AQcok)">
+> <a href="https://www.youtube.com/watch?v=i1AOd7AQcok">
 >   <img src="https://img.youtube.com/vi/i1AOd7AQcok/0.jpg" width="270">
 > </a>
 >
 > </div>
+
 
 Apabila anda ingin langsung mencoba *source code* saya, bisa langsung ambil saja dengan menggunakan langkah-langkah berikut:
 
@@ -107,18 +108,25 @@ Maka, server akan aktif dan menunggu pesan dari *client*.
 Karena ***UDP Server*** telah dibuat, maka sekarang saatnya melakukan konfigurasi untuk ***UDP Client*** nya. *Client* ini akan bertugas untuk mengirim pesan ke server dan menunggu balasan dari *server*. Berikut *code program* nya:
 
 ```python
-import socket
+import socket  # Mengimpor library socket untuk komunikasi jaringan
 
-target_host = "127.0.0.1"
-target_port = 9997 
+# Konfigurasi target (alamat server tujuan)
+target_host = "127.0.0.1"   # IP server (localhost)
+target_port = 9997          # Port server yang digunakan untuk berkomunikasi
 
+# Membuat socket UDP
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.sendto(b"Hello UDP Server", (target_host, target_port)) # Mengirim data
 
-# Menerima data
-data, address = client.recvfrom(4096)
+# Mengirim data ke server (dalam bentuk bytes)
+client.sendto(b"Hello UDP Server", (target_host, target_port))
+
+# Menerima balasan dari server
+data, address = client.recvfrom(4096)    # 4096 = ukuran maksimum data yang diterima
+
+# Menampilkan balasan server ke terminal
 print("Respon dari server: \"{}\"".format(data.decode()))
 
+# Menutup koneksi socket client
 client.close()
 ```
 
